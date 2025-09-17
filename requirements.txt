@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+pandas
+scikit-learn
+transformers
+torch
+faiss-cpu
+langchain
+pydantic
+sqlalchemy
+psycopg2-binary
+streamlit
+numpy
+nltk
+spacy
+beautifulsoup4
+requests
