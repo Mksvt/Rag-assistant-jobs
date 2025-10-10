@@ -1,8 +1,19 @@
+"""
+Frontend application for the RAG Assistant.
+
+This module defines the Streamlit-based user interface for interacting with the RAG Assistant.
+"""
+
 import streamlit as st
 from api_client import search_vacancies
 from file_handler import handle_uploaded_file
 
 def main():
+    """
+    Main function for the Streamlit application.
+
+    This function defines the layout and functionality of the user interface.
+    """
     st.title("RAG Assistant for Job Market")
 
     # Sidebar for file upload

@@ -1,3 +1,9 @@
+"""
+Script for data ingestion into the database.
+
+This script provides functions to load vacancies, resumes, and corporate policies into the database.
+"""
+
 import os
 import pandas as pd
 from sqlalchemy import create_engine
@@ -5,11 +11,23 @@ from backend.database.session import SessionLocal
 from backend.database.models import Vacancy, Resume, CorporatePolicy
 
 def load_vacancies(file_path):
+    """
+    Load vacancies from a CSV file into the database.
+
+    Args:
+        file_path (str): Path to the CSV file containing vacancy data.
+    """
     vacancies_df = pd.read_csv(file_path)
     engine = create_engine('postgresql://user:password@localhost/dbname')
     vacancies_df.to_sql(Vacancy.__tablename__, engine, if_exists='append', index=False)
 
 def load_resumes(directory_path):
+    """
+    Load resumes from a directory into the database.
+
+    Args:
+        directory_path (str): Path to the directory containing resume files.
+    """
     engine = create_engine('postgresql://user:password@localhost/dbname')
     for filename in os.listdir(directory_path):
         if filename.endswith('.pdf') or filename.endswith('.docx'):
@@ -22,6 +40,12 @@ def load_resumes(directory_path):
             db.close()
 
 def load_corporate_policies(directory_path):
+    """
+    Load corporate policies from a directory into the database.
+
+    Args:
+        directory_path (str): Path to the directory containing policy files.
+    """
     engine = create_engine('postgresql://user:password@localhost/dbname')
     for filename in os.listdir(directory_path):
         if filename.endswith('.pdf') or filename.endswith('.docx'):
@@ -34,6 +58,9 @@ def load_corporate_policies(directory_path):
             db.close()
 
 def main():
+    """
+    Main function to load all data into the database.
+    """
     load_vacancies('data/vacancies/vacancies.csv')
     load_resumes('data/resumes')
     load_corporate_policies('data/policies')
