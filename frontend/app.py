@@ -1,25 +1,25 @@
 import streamlit as st
-import requests
+from api_client import search_vacancies
+from file_handler import handle_uploaded_file
 
 def main():
     st.title("RAG Assistant for Job Market")
-    
+
+    # Sidebar for file upload
     st.sidebar.header("Upload Resume")
     uploaded_file = st.sidebar.file_uploader("Choose a file", type=["pdf", "docx"])
-    
+
     if uploaded_file is not None:
-        st.sidebar.success("File uploaded successfully!")
-        # Here you would typically process the uploaded resume
-        
+        handle_uploaded_file(uploaded_file)
+
+    # Sidebar for job search
     st.sidebar.header("Job Search")
     job_title = st.sidebar.text_input("Enter desired job title/field")
-    
+
     if st.sidebar.button("Search"):
         if job_title:
-            # Call the backend API to get job recommendations
-            response = requests.post("http://localhost:8000/api/vacancies/search", json={"job_title": job_title})
-            if response.status_code == 200:
-                recommendations = response.json()
+            recommendations = search_vacancies(job_title)
+            if recommendations:
                 st.write("### Recommended Jobs:")
                 for job in recommendations:
                     st.write(f"- {job['title']} at {job['company']} (Chance: {job['chance']}%)")
