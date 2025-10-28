@@ -1,7 +1,7 @@
 """
 Router for handling vacancy-related endpoints.
 
-This module defines the API endpoints for searching and retrieving vacancies.ю
+This module defines the API endpoints for searching and retrieving vacancies.
 """
 
 from fastapi import APIRouter, HTTPException

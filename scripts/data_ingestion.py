@@ -5,10 +5,28 @@ This script provides functions to load vacancies, resumes, and corporate policie
 """
 
 import os
+import sys
 import pandas as pd
 from sqlalchemy import create_engine
+
+# Add project root to sys.path to allow for absolute imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from backend.database.session import SessionLocal
 from backend.database.models import Vacancy, Resume, CorporatePolicy
+
+def extract_resume_data(file_path):
+    """
+    Placeholder function to extract data from a resume file.
+    In a real implementation, this would use NLP to parse the file.
+    """
+    return {"content": f"Extracted data from {os.path.basename(file_path)}"}
+
+def extract_policy_data(file_path):
+    """
+    Placeholder function to extract data from a policy file.
+    """
+    return {"content": f"Extracted data from {os.path.basename(file_path)}"}
 
 def load_vacancies(file_path):
     """
@@ -28,7 +46,6 @@ def load_resumes(directory_path):
     Args:
         directory_path (str): Path to the directory containing resume files.
     """
-    engine = create_engine('postgresql://user:password@localhost/dbname')
     for filename in os.listdir(directory_path):
         if filename.endswith('.pdf') or filename.endswith('.docx'):
             # Logic to extract data from resumes
@@ -46,7 +63,6 @@ def load_corporate_policies(directory_path):
     Args:
         directory_path (str): Path to the directory containing policy files.
     """
-    engine = create_engine('postgresql://user:password@localhost/dbname')
     for filename in os.listdir(directory_path):
         if filename.endswith('.pdf') or filename.endswith('.docx'):
             # Logic to extract data from corporate policies
