@@ -4,9 +4,18 @@ Router for handling vacancy-related endpoints.
 This module defines the API endpoints for searching and retrieving vacancies.
 """
 
+import sys
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException
-from backend.schemas.vacancies import VacancyRequest, VacancyResponse
-from backend.services.vacancies import get_vacancies
+
+# Add project root to sys.path
+project_root = Path(__file__).parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from backend.schemas.vacancies import VacancyRequest, VacancyResponse  # pylint: disable=wrong-import-position
+from backend.services.vacancies import get_vacancies  # pylint: disable=wrong-import-position
 
 router = APIRouter()
 
@@ -27,4 +36,4 @@ def search_vacancies(request: VacancyRequest):
     try:
         return get_vacancies(request)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e

@@ -4,9 +4,18 @@ Main entry point for the backend application.
 This file initializes and runs the FastAPI application.
 """
 
+import sys
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import vacancies
+
+# Add project root to sys.path
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from backend.routers import vacancies  # pylint: disable=wrong-import-position
 
 app = FastAPI()
 

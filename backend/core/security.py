@@ -1,3 +1,9 @@
+"""
+Core security features for the application.
+
+This module provides functions for handling JWT tokens and password hashing.
+"""
+
 from jose import jwt
 from passlib.context import CryptContext
 

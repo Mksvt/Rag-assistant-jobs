@@ -1,3 +1,9 @@
+"""
+File handler module for processing uploaded files.
+
+This module provides functions to handle file uploads from the frontend.
+"""
+
 import streamlit as st
 
 def handle_uploaded_file(uploaded_file):

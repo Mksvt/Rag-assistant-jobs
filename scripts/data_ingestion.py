@@ -6,14 +6,18 @@ This script provides functions to load vacancies, resumes, and corporate policie
 
 import os
 import sys
+from pathlib import Path
+
 import pandas as pd
 from sqlalchemy import create_engine
 
 # Add project root to sys.path to allow for absolute imports
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+project_root = Path(__file__).parent.parent
+if str(project_root) not in sys.path:
+    sys.path.append(str(project_root))
 
-from backend.database.session import SessionLocal
-from backend.database.models import Vacancy, Resume, CorporatePolicy
+from backend.database.session import SessionLocal  # pylint: disable=wrong-import-position
+from backend.database.models import Vacancy, Resume, CorporatePolicy  # pylint: disable=wrong-import-position
 
 def extract_resume_data(file_path):
     """

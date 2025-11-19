@@ -13,8 +13,12 @@ def get_vacancies(request):
 
     Returns:
         list[dict]: A list of dictionaries representing vacancies.
+
+    Note:
+        This is a mock implementation. Future versions will implement
+        actual vacancy search logic using request.job_title.
     """
-    # Mock implementation for now
+    _ = request  # Mark as intentionally unused for now
     return [
         {"title": "Python Developer", "company": "XYZ Corp", "chance": 85.0},
         {"title": "Data Analyst", "company": "ABC Inc", "chance": 72.0},
