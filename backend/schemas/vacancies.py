@@ -23,7 +23,13 @@ class VacancyResponse(BaseModel):
         title (str): The title of the job vacancy.
         company (str): The company offering the job.
         chance (float): The calculated chance of matching the job.
+        location (str): Job location.
+        url (str): URL to the job posting.
+        source (str): Source of the vacancy (e.g., 'arbeitnow', 'remotive').
     """
     title: str
     company: str
     chance: float
+    location: str = "N/A"
+    url: str = ""
+    source: str = "unknown"

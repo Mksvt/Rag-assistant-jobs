@@ -1,9 +1,15 @@
+"""
+RAG (Retrieval-Augmented Generation) service for job matching.
+
+This module provides semantic search and ranking functionality for vacancies.
+"""
+
 from typing import List, Dict, Any
 from fastapi import HTTPException
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-import json
+
 
 class RAGService:
     def __init__(self):

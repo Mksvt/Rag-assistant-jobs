@@ -16,8 +16,13 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from backend.routers import vacancies  # pylint: disable=wrong-import-position
+from backend.api.endpoints import vacancies as vacancy_crud  # pylint: disable=wrong-import-position
 
-app = FastAPI()
+app = FastAPI(
+    title="SkillMatch AI - RAG Assistant",
+    description="Job matching system with ML and RAG capabilities",
+    version="1.0.0"
+)
 
 # Add CORS middleware
 app.add_middleware(
@@ -29,7 +34,19 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(vacancies.router)
+# Job matching and search (uses external APIs)
+app.include_router(
+    vacancies.router,
+    prefix="/api/vacancies",
+    tags=["Job Matching"]
+)
+
+# CRUD operations for database (manual vacancy management)
+app.include_router(
+    vacancy_crud.router,
+    prefix="/api/db",
+    tags=["Database CRUD"]
+)
 
 @app.get("/")
 def read_root():

@@ -15,3 +15,8 @@ nltk
 spacy
 beautifulsoup4
 requests
+PyPDF2
+python-docx
+types-requests
+types-python-jose
+pandas-stubs
